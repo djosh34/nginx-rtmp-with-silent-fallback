@@ -1,5 +1,6 @@
 #!/bin/sh
 
+echo "Main publish done script started"
 # This script runs when a main stream stops publishing to nginx
 
 set -euf
@@ -8,7 +9,7 @@ DIR="$(dirname "$0")"
 . "$DIR/config.sh"
 . "$DIR/utils.sh" # parse_argv, is_running, kill, push_stream
 
-exec > "$LOGS_FOLDER/scripts/main_publish_done.log" 2>&1
+exec > "$LOGS_FOLDER/main_publish_done.log" 2>&1
 
 parse_argv "$@"
 

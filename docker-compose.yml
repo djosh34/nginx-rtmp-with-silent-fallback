@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nginx-rtmp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nginx-rtmp-server
+    volumes:
+      - ./config:/config
+      - ./pids:/pids
+      - ./logs:/logs
+      - ./var-logs:/var/log/nginx-rtmp/backup
+      - ./recordings:/recordings
+      - ./scripts:/scripts
+      - ./www:/www
+      - ./tmp:/tmp
+    ports:
+      - "1935:1935"  # RTMP port
+      - "1936:1936"  # RTMP out port
+      - "9980:80"      # HTTP port
+    entrypoint: ["/bin/sh", "-c", "chmod +x /scripts/entrypoint.sh && /scripts/entrypoint.sh"]
